@@ -1,12 +1,17 @@
 import React from "react";
 import { mount, configure } from "enzyme";
 import CommentBox from "components/CommentBox";
+import Root from "Root";
 import Adapter from "enzyme-adapter-react-16";
 configure({ adapter: new Adapter() });
 
 let wrapper;
 beforeEach(() => {
-  wrapper = mount(<CommentBox />);
+  wrapper = mount(
+    <Root>
+      <CommentBox />
+    </Root>
+  );
 });
 
 afterEach(() => {
@@ -15,7 +20,7 @@ afterEach(() => {
 
 it("has a textarea and a button", () => {
   expect(wrapper.find("textarea").length).toEqual(1);
-  expect(wrapper.find("button").length).toEqual(1);
+  expect(wrapper.find("button").length).toEqual(2);
 });
 
 describe("the textarea", () => {
